@@ -10,6 +10,8 @@
 		452DC72F1FD1483F00680215 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452DC72E1FD1483F00680215 /* main.swift */; };
 		452DC7361FD1489700680215 /* Day1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452DC7351FD1489700680215 /* Day1.swift */; };
 		452DC73D1FD14ED400680215 /* 1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 452DC73A1FD14A8200680215 /* 1 */; };
+		45EEADBF1FD407FF009C0730 /* Day2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45EEADBE1FD407FF009C0730 /* Day2.swift */; };
+		45EEADC11FD40A76009C0730 /* 2 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 45EEADC01FD40820009C0730 /* 2 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -19,6 +21,7 @@
 			dstPath = Input;
 			dstSubfolderSpec = 16;
 			files = (
+				45EEADC11FD40A76009C0730 /* 2 in CopyFiles */,
 				452DC73D1FD14ED400680215 /* 1 in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -30,6 +33,8 @@
 		452DC72E1FD1483F00680215 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		452DC7351FD1489700680215 /* Day1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day1.swift; sourceTree = "<group>"; };
 		452DC73A1FD14A8200680215 /* 1 */ = {isa = PBXFileReference; lastKnownFileType = text; path = 1; sourceTree = "<group>"; };
+		45EEADBE1FD407FF009C0730 /* Day2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day2.swift; sourceTree = "<group>"; };
+		45EEADC01FD40820009C0730 /* 2 */ = {isa = PBXFileReference; lastKnownFileType = text; path = 2; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				452DC7351FD1489700680215 /* Day1.swift */,
+				45EEADBE1FD407FF009C0730 /* Day2.swift */,
 			);
 			path = Days;
 			sourceTree = "<group>";
@@ -81,6 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				452DC73A1FD14A8200680215 /* 1 */,
+				45EEADC01FD40820009C0730 /* 2 */,
 			);
 			path = Input;
 			sourceTree = "<group>";
@@ -144,6 +151,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				452DC7361FD1489700680215 /* Day1.swift in Sources */,
+				45EEADBF1FD407FF009C0730 /* Day2.swift in Sources */,
 				452DC72F1FD1483F00680215 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
