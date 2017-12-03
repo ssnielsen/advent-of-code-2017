@@ -28,7 +28,7 @@
 /* Begin PBXFileReference section */
 		452DC72B1FD1483F00680215 /* advent-of-code-2017 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "advent-of-code-2017"; sourceTree = BUILT_PRODUCTS_DIR; };
 		452DC72E1FD1483F00680215 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
-		452DC7351FD1489700680215 /* Day1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Day1.swift; path = ../Days/Day1.swift; sourceTree = "<group>"; };
+		452DC7351FD1489700680215 /* Day1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Day1.swift; sourceTree = "<group>"; };
 		452DC73A1FD14A8200680215 /* 1 */ = {isa = PBXFileReference; lastKnownFileType = text; path = 1; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -74,8 +74,7 @@
 			children = (
 				452DC7351FD1489700680215 /* Day1.swift */,
 			);
-			name = Days;
-			path = "New Group";
+			path = Days;
 			sourceTree = "<group>";
 		};
 		452DC7391FD14A7400680215 /* Input */ = {
