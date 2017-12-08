@@ -23,7 +23,17 @@ struct Day8: Day {
     }
 
     static func part2(input: String) -> String {
-        return ""
+        let instructions = parse(input)
+        var largestValue = Int.min
+        var machine = Machine(registers: [:])
+
+        instructions.forEach {
+            machine.process(instruction: $0)
+            let localLargestValue = machine.registers.values.sorted().last ?? Int.min
+            largestValue = localLargestValue > largestValue ? localLargestValue : largestValue
+        }
+
+        return "\(largestValue)"
     }
 
     private static func parse(_ input: String) -> [Instruction] {
