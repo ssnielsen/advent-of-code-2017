@@ -25,7 +25,23 @@ struct Day10: Day {
     }
 
     static func part2(input: String) -> String {
-        return ""
+        let lengths = parseAscii(input) + [17, 31, 73, 47, 23]
+        let rounds = 64
+        let repeatedLengths = Array(repeating: lengths, count: rounds).flatMap { $0 }
+        let initial = Array(0...255)
+
+        let result = repeatedLengths.reduce((hash: initial, position: 0, skipSize: 0)) { result, length in
+            return tieKnot(onHash: result.hash,
+                           inPosition: result.position,
+                           withLength: length,
+                           usingSkipSize: result.skipSize)
+        }
+        let sparseHash = result.hash
+        let blocks = sparseHash.chunked(by: 16)
+        let denseHash = blocks.map { $0.reduce(0, ^) }
+        let hexString = denseHash.map { String(format: "%02X", $0) }.joined().lowercased()
+
+        return hexString
     }
 
     static func tieKnot<T>(onHash hash: [T],
@@ -42,6 +58,10 @@ struct Day10: Day {
 
     private static func parse(_ input: String) -> [Int] {
         return input.components(separatedBy: .newlines).first!.components(separatedBy: ",").flatMap(Int.init)
+    }
+
+    private static func parseAscii(_ input: String) -> [Int] {
+        return input.components(separatedBy: .newlines).first!.unicodeScalars.filter { $0.isASCII } .map { Int($0.value) }
     }
 }
 
@@ -67,6 +87,12 @@ fileprivate extension Array {
             if (endPointer < 0) {
                 endPointer = count - 1
             }
+        }
+    }
+
+    func chunked(by chunkSize: Int) -> [[Element]] {
+        return stride(from: 0, to: self.count, by: chunkSize).map {
+            Array(self[$0..<Swift.min($0 + chunkSize, self.count)])
         }
     }
 }
