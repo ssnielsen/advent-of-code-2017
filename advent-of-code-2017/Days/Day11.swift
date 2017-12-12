@@ -22,7 +22,17 @@ struct Day11: Day {
     }
 
     static func part2(input: String) -> String {
-        return ""
+        let directions = parse(input)
+
+        let origin = Vector(x: 0, y: 0, z: 0)
+
+        let positions = directions.reduce(([origin])) { (history, direction) in
+            return history + [history.last! + direction.move]
+        }
+
+        let distances = positions.map { $0.distance }
+
+        return "\(distances.max()!)"
     }
     struct Vector {
         var x: Int
