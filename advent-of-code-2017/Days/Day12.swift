@@ -66,13 +66,3 @@ struct Day12: Day {
         return Dictionary(tuples: programs)
     }
 }
-
-fileprivate extension Dictionary {
-    init(tuples: [(Key, Value)]) {
-        self = tuples.reduce([Key: Value]()) {
-            var dict = $0
-            dict[$1.0] = $1.1
-            return dict
-        }
-    }
-}
