@@ -29,7 +29,7 @@ struct Helper {
     }
 }
 
-let input = Helper.readDay(13)
-let day = Day13.self
+let input = Helper.readDay(14)
+let day = Day14.self
 print(day.part1(input: input))
 print(day.part2(input: input))

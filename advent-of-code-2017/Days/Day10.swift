@@ -65,7 +65,7 @@ struct Day10: Day {
     }
 }
 
-fileprivate extension Array {
+extension Array {
     mutating func reverse(startPosition: Int, length: Int) {
         var startPointer = startPosition % count
         var endPointer = (startPosition + length - 1) % count
