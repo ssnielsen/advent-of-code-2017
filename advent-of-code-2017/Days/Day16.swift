@@ -9,20 +9,37 @@
 import Foundation
 
 struct Day16: Day {
+    static let initial = Array("abcdefghijklmnop").map { String($0) }
+
     static func part1(input: String) -> String {
         let moves = parse(input)
 
-        let initial = Array("abcdefghijklmnop").map { String($0) }
-
-        let result = moves.reduce(initial) { programs, move in
-            execute(move, in: programs)
-        }
+        let result = moves.reduce(initial) { execute($1, in: $0) }
 
         return String(result.joined())
     }
 
     static func part2(input: String) -> String {
-        return ""
+        let moves = parse(input)
+
+        var cycles = 0
+        var latestState = initial
+
+        // Find how many applications of the moves it takes to make a cycle.
+        repeat {
+            latestState = moves.reduce(latestState) { execute($1, in: $0) }
+            cycles += 1
+        } while latestState != initial
+
+        let times = 1_000_000_000
+
+        // Do the appropriate amount of applications
+        var stateAfterTimes = initial
+        for _ in 0..<(times % cycles) {
+            stateAfterTimes = moves.reduce(stateAfterTimes) { execute($1, in: $0) }
+        }
+
+        return String(stateAfterTimes.joined())
     }
 
     private static func execute(_ move: Move, in programs: [String]) -> [String] {
