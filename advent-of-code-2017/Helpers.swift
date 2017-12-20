@@ -17,3 +17,9 @@ extension Dictionary {
         }
     }
 }
+
+extension Array where Element == String {
+    func nonEmptyLines() -> [String] {
+        return filter { !$0.isEmpty }
+    }
+}

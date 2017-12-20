@@ -26,10 +26,10 @@ struct Day14: Day {
     static func part2(input: String) -> String {
         let parsed = parse("flqrgnkx")
 
-        let grid = (0...127).map { (row: Int) -> [Bool] in
-            let hash = Day10.part2(input: "\(parsed)-\(row)")
-            return hash.map { convertToBool(String($0)) }.flatMap { $0 }
-        }
+//        let grid = (0...127).map { (row: Int) -> [Bool] in
+//            let hash = Day10.part2(input: "\(parsed)-\(row)")
+//            return hash.map { convertToBool(String($0)) }.flatMap { $0 }
+//        }
 
         return ""
     }
