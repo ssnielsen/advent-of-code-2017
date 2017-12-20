@@ -24,13 +24,23 @@ struct Day14: Day {
     }
 
     static func part2(input: String) -> String {
+        let parsed = parse("flqrgnkx")
+
+        let grid = (0...127).map { (row: Int) -> [Bool] in
+            let hash = Day10.part2(input: "\(parsed)-\(row)")
+            return hash.map { convertToBool(String($0)) }.flatMap { $0 }
+        }
+
         return ""
     }
 
     private static func bitOnesIn(_ string: String) -> Int {
+        return convertToBool(string).map { $0 ? 1 : 0 }.reduce(0, +)
+    }
+
+    private static func convertToBool(_ string: String) -> [Bool] {
         let number = Int(string, radix: 16)!
-        let zeros = [0b1000, 0b0100, 0b0010, 0b0001].map { (number & $0 > 0) ? 1 : 0 }.reduce(0, +)
-        return zeros
+        return [0b1000, 0b0100, 0b0010, 0b0001].map { number & $0 > 0 }
     }
 
     private static func parse(_ input: String) -> String {
