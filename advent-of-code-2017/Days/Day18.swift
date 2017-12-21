@@ -48,30 +48,31 @@ struct Day18: Day {
 
     private static func step(_ instruction: Instruction, with registers: Registers, position: Int) -> (registers: Registers, position: Int) {
         var registers = registers
-        var nextPosition = position + 1
 
         switch instruction {
         case let .snd(register):
             registers[lastSoundRegister] = registers[.register(register)]
+            return (registers, position + 1)
         case let .set(register, value):
             registers[register] = registers[value]
+            return (registers, position + 1)
         case let .add(register, value):
             registers[register] = registers[.register(register)] + registers[value]
+            return (registers, position + 1)
         case let .mul(register, value):
             registers[register] = registers[.register(register)] * registers[value]
+            return (registers, position + 1)
         case let .mod(register, value):
             registers[register] = registers[.register(register)] % registers[value]
+            return (registers, position + 1)
         case let .rcv(register):
             if registers[.register(register)] > 0 {
                 registers[recoveredSoundRegister] = registers[lastSoundRegister]
             }
+            return (registers, position + 1)
         case let .jgz(v1, v2):
-            if registers[v1] > 0 {
-                nextPosition = position + registers[v2]
-            }
+            return (registers, position + (registers[v1] > 0 ? registers[v2] : 1))
         }
-
-        return (registers: registers, position: nextPosition)
     }
 
     private static func parse(_ input: String) -> [Instruction] {
