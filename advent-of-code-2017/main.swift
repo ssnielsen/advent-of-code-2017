@@ -18,7 +18,7 @@ struct Helper {
         let path = "\(FileManager.default.currentDirectoryPath)/Input/\(dayNumber)"
 
         do {
-            let string = try String(contentsOfFile: path)
+            let string = try String(contentsOfFile: path, encoding: .utf8)
 
             return string
         } catch {
@@ -29,7 +29,7 @@ struct Helper {
     }
 }
 
-let input = Helper.readDay(18)
-let day = Day18.self
+let input = Helper.readDay(19)
+let day = Day19.self
 print(day.part1(input: input))
 print(day.part2(input: input))
