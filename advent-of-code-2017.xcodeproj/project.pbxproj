@@ -410,6 +410,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P5PVXSYEYU;
+				OTHER_LDFLAGS = "-Wl,-stack_size,1000000";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 			};
@@ -420,6 +421,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P5PVXSYEYU;
+				OTHER_LDFLAGS = "-Wl,-stack_size,1000000";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 			};
