@@ -13,13 +13,6 @@ fileprivate extension Dictionary where Key == Int, Value == [Int: Character] {
         get {
             return self[point.x]?[point.y]
         }
-        set {
-            if newValue == nil {
-                self[point.x]?.removeValue(forKey: point.y)
-            } else {
-                self[point.x, default: [:]][point.y] = newValue!
-            }
-        }
     }
 }
 
@@ -35,11 +28,14 @@ struct Day19: Day {
         let grid = parse(input)
         let start = startingPoint(in: grid)
 
-        return route(in: grid, from: start, visitedPackages: "")
+        return route(in: grid, from: start, visitedPackages: "").components(separatedBy: .init(charactersIn: "+|-")).joined()
     }
 
     static func part2(input: String) -> String {
-        return ""
+        let grid = parse(input)
+        let start = startingPoint(in: grid)
+
+        return "\(route(in: grid, from: start, visitedPackages: "").count + 1)"
     }
 
     private static func startingPoint(in grid: Grid) -> Point {
@@ -52,50 +48,35 @@ struct Day19: Day {
         }
 
         let letter = String(grid[point: next]!)
-
-        if !["+", "|", "-"].contains(letter) {
-            return route(in: grid, from: next, comingFrom: point, visitedPackages: visitedPackages + letter)
-        } else {
-            return route(in: grid, from: next, comingFrom: point, visitedPackages: visitedPackages)
-        }
+        return route(in: grid, from: next, comingFrom: point, visitedPackages: visitedPackages + letter)
     }
 
     private static func step(from point: Point, comingFrom pointBefore: Point, in grid: Grid) -> Point? {
         let letterBefore = grid[point: pointBefore] ?? "1"
         let letterCurrent = grid[point: point]!
         let neighbors = generateNeighbors(for: point)
-        let nonVisitedNeighbors = neighbors.filter {
-            guard let letterNeighbor = grid[point: $0] else {
+        return neighbors.first {
+            guard $0 != pointBefore, let letterNeighbor = grid[point: $0] else {
                 return false
             }
 
-            if $0 == pointBefore {
-                return false
-            }
-
-            let sameAxis = $0.x == pointBefore.x || $0.y == pointBefore.y
+            let onSameAxis = $0.x == pointBefore.x || $0.y == pointBefore.y
 
             switch (letterBefore, letterCurrent, letterNeighbor) {
-            case (_, _, let letter) where ("A"..."Z").contains(String(letter)) && sameAxis:
-                return true
-            case (_, let letter, _) where ("A"..."Z").contains(String(letter)) && sameAxis:
-                return true
-            case (let letter, _, _) where ("A"..."Z").contains(String(letter)) && sameAxis:
+            case (_, _, let letter) where ("A"..."Z").contains(String(letter)) && onSameAxis:
                 return true
             case (_, "+", _):
                 return true
             case (_, _, "+"):
                 return true
-            case (_, _, "-") where sameAxis:
+            case (_, _, "-") where onSameAxis:
                 return true
-            case (_, _, "|") where sameAxis:
+            case (_, _, "|") where onSameAxis:
                 return true
             default:
                 return false
             }
         }
-
-        return nonVisitedNeighbors.first
     }
 
     private static func generateNeighbors(for point: Point) -> [Point] {
