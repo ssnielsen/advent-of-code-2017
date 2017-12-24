@@ -24,3 +24,9 @@ extension Array where Element == String {
     }
 }
 
+extension String {
+    func nonEmptyLines() -> [String] {
+        return components(separatedBy: .newlines).nonEmptyLines()
+    }
+}
+
