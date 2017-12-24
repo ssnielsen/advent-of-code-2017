@@ -25,7 +25,11 @@ struct Day20: Day {
     }
 
     static func part2(input: String) -> String {
-        return ""
+        let particles = parse(input)
+
+        let result = collisionLoop(overParticles: particles, initialSize: particles.count)
+
+        return "\(result.count)"
     }
 
     private static func simulateTick(in particles: [Particle]) -> [Particle] {
@@ -35,11 +39,42 @@ struct Day20: Day {
         }
     }
 
+    private static func collisionLoop(overParticles particles: [Particle], initialSize: Int) -> [Particle] {
+        let particlesAfterTick = simulateTick(in: particles)
+        let afterRemovingCollisions = removeCollisions(in: particlesAfterTick)
+
+        if particlesAfterTick.count != initialSize && particlesAfterTick.count == afterRemovingCollisions.count {
+            return afterRemovingCollisions
+        } else {
+            return collisionLoop(overParticles: afterRemovingCollisions, initialSize: initialSize)
+        }
+    }
+
     private static func closestParticle(in particles: [Particle]) -> Int {
         return particles.enumerated()
             .map { ($0.offset, $0.element.position) }
             .sorted { distanceToOrigin($0.1) < distanceToOrigin($1.1) }
             .first!.0
+    }
+
+    private static func removeCollisions(in particles: [Particle]) -> [Particle] {
+        let range = 0..<particles.count
+        let indexPairs: [(Int, Int)] = range.map { first in
+            range.map { second in
+                (first, second)
+            }
+        }.flatMap { $0 }
+        let collidingParticles = indexPairs.reduce(Set<Int>()) { result, indexPair in
+            let first = indexPair.0
+            let second = indexPair.1
+            if first != second && particles[first].position == particles[second].position {
+                return result.union([first, second])
+            } else {
+                return result
+            }
+        }
+
+        return particles.enumerated().filter { !collidingParticles.contains($0.offset) }.map { $0.element }
     }
 
     private static func distanceToOrigin(_ particle: Particle) -> Int {
@@ -69,4 +104,8 @@ struct Day20: Day {
 
 func + (lhs: Day20.Coordinate, rhs: Day20.Coordinate) -> Day20.Coordinate {
     return (lhs.x + rhs.x, lhs.y + rhs.y, lhs.z + rhs.z)
+}
+
+func == (lhs: Day20.Coordinate, rhs: Day20.Coordinate) -> Bool {
+    return lhs.x == rhs.x && lhs.y == rhs.y && lhs.z == rhs.z
 }
