@@ -54,9 +54,7 @@ struct Day12: Day {
     }
 
     private static func parse(_ input: String) -> Graph {
-        let lines = input.components(separatedBy: .newlines).filter { !$0.isEmpty }
-
-        let programs = lines.map { (line: String) -> (Int, [Int]) in
+        let programs = input.nonEmptyLines().map { (line: String) -> (Int, [Int]) in
             let programLine = line.components(separatedBy: " <-> ")
             let program = Int(programLine.first!)!
             let neighborPrograms = programLine.last!.components(separatedBy: ", ").map { Int($0)! }

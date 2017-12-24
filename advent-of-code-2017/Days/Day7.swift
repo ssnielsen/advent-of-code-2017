@@ -24,11 +24,9 @@ struct Day7: Day {
     }
 
     private static func parse(_ input: String) -> [String: ([String], Int)] {
-        let lines = input.components(separatedBy: .newlines).filter { !$0.isEmpty }
-
         var programs = [String: ([String], Int)]()
 
-        lines.forEach {
+        input.nonEmptyLines().forEach {
             let parts = $0.components(separatedBy: " -> ")
             let program = parts.first!.components(separatedBy: .whitespaces)
             let name = program.first!

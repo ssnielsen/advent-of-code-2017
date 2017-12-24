@@ -33,8 +33,7 @@ struct Day4: Day {
 
     private static func parse(_ input: String) -> [[String]] {
         return input
-            .components(separatedBy: .newlines)
-            .filter { !$0.isEmpty }
+            .nonEmptyLines()
             .map { $0.components(separatedBy: .whitespaces) }
     }
 }

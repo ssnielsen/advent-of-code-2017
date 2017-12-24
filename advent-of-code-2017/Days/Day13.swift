@@ -39,7 +39,7 @@ struct Day13: Day {
     }
 
     private static func parse(_ input: String) -> [Int: Int] {
-        let parsed: [(Int, Int)] = input.components(separatedBy: .newlines).filter { !$0.isEmpty }.map {
+        let parsed: [(Int, Int)] = input.nonEmptyLines().map {
             let layer = $0.components(separatedBy: ": ")
             return (Int(layer.first!)!, Int(layer.last!)!)
         }

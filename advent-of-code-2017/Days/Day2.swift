@@ -26,7 +26,7 @@ struct Day2: Day {
     }
 
     private static func parse(_ input: String) -> [[Int]] {
-        let lines = input.components(separatedBy: "\n")
+        let lines = input.nonEmptyLines()
         let splittedLines = lines.map {
             $0.components(separatedBy: "    ").map {
                 Int($0)

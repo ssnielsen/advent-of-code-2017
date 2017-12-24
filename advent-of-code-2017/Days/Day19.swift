@@ -91,11 +91,9 @@ struct Day19: Day {
     }
 
     private static func parse(_ input: String) -> Grid {
-        let lines = input.components(separatedBy: .newlines).nonEmptyLines()
-
         var grid = Grid()
 
-        lines.enumerated().forEach { x, line in
+        input.nonEmptyLines().enumerated().forEach { x, line in
             line.enumerated().forEach { y, letter in
                 if letter != " " {
                     grid[x, default: [:]][y] = letter

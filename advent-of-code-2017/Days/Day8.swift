@@ -37,7 +37,7 @@ struct Day8: Day {
     }
 
     private static func parse(_ input: String) -> [Instruction] {
-        return input.components(separatedBy: .newlines).filter { !$0.isEmpty }.map(parseLine)
+        return input.nonEmptyLines().map(parseLine)
     }
 
     private static func parseLine(_ line: String) -> Instruction {

@@ -39,6 +39,6 @@ struct Day5: Day {
     }
 
     private static func parse(_ input: String) -> [Int] {
-        return input.components(separatedBy: .newlines).filter { !$0.isEmpty }.map { Int($0)! }
+        return input.nonEmptyLines().map { Int($0)! }
     }
 }

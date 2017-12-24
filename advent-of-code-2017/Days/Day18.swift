@@ -76,7 +76,7 @@ struct Day18: Day {
     }
 
     private static func parse(_ input: String) -> [Instruction] {
-        return input.components(separatedBy: .newlines).nonEmptyLines().map(Instruction.init)
+        return input.nonEmptyLines().map(Instruction.init)
     }
 
     enum Value {

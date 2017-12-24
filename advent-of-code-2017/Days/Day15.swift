@@ -89,7 +89,7 @@ struct Day15: Day {
     }
 
     static func parse(_ input: String) -> [(String, Int)] {
-        return input.components(separatedBy: .newlines).nonEmptyLines().map {
+        return input.nonEmptyLines().map {
             let lineTokens = $0.components(separatedBy: .whitespaces)
             let name = lineTokens[1]
             let startValue = Int(lineTokens.last!)!
