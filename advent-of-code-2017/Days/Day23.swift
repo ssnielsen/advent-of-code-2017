@@ -20,7 +20,9 @@ struct Day23: Day {
     }
 
     static func part2(input: String) -> String {
-        return ""
+        let registerH = runPart2()
+
+        return "\(registerH)"
     }
 
     private static func runPart1(instructions: [Instruction], position: Int = 0, registers: Registers = Registers(), mulInstructions: Int = 0) -> Int {
@@ -35,6 +37,10 @@ struct Day23: Day {
                 return runPart1(instructions: instructions, position: newPosition, registers: newRegisters, mulInstructions: mulInstructions)
             }
         }
+    }
+
+    private static func runPart2() -> Int {
+        return stride(from: 109900, to: 126901, by: 17).filter { !$0.isPrime }.count
     }
 
     private static func perform(_ instruction: Instruction, withRegisters registers: Registers, position: Int) -> (registers: Registers, position: Int) {
@@ -105,6 +111,15 @@ struct Day23: Day {
             default:
                 fatalError("\(string) not recognized as valid input")
             }
+        }
+    }
+}
+
+fileprivate extension Int {
+    var isPrime: Bool {
+        let max = self |> Double.init |> sqrt |> ceil |> Int.init
+        return (2..<max).reduce(true) {
+            $0 && (self % $1 != 0)
         }
     }
 }

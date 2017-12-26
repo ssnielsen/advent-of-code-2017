@@ -442,8 +442,10 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P5PVXSYEYU;
+				GCC_OPTIMIZATION_LEVEL = 0;
 				OTHER_LDFLAGS = "-Wl,-stack_size,10000000";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
