@@ -206,6 +206,12 @@ func |> <T, U> (o: T, f: (T) -> U) -> U {
     return f(o)
 }
 
+infix operator |!> : MultiplicationPrecedence
+
+func |!> <T, U> (o: T, f: (T) -> U?) -> U {
+    return f(o)!
+}
+
 extension Day21.Grid: Hashable {
     var hashValue: Int {
         return inputFormat.hashValue
